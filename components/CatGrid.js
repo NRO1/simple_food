@@ -1,6 +1,7 @@
 import { View, Text, Pressable, StyleSheet, Platform } from "react-native";
 
-function CatGrid({ title, color }) {
+function CatGrid({ title, color, onPress }) {
+
   return (
     <View style={styles.grid}>
       <Pressable
@@ -9,6 +10,7 @@ function CatGrid({ title, color }) {
           styles.button,
           pressed ? styles.buttonPressed : null,
         ]}
+        onPress={onPress}
       >
         <View style={[styles.innerContainer, { backgroundColor: color}]} >
           <Text style={styles.title}>{title}</Text>
