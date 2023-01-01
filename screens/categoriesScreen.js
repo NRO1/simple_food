@@ -5,7 +5,9 @@ import CatGrid from "../components/CatGrid";
 function CategoriesScreen({ navigation }) {
   function renderCatItem(itemData) {
     function pressHandler() {
-      navigation.navigate("MealsOverview");
+      navigation.navigate("MealsOverview",{
+        categoryId: itemData.item.id
+      });
     }
     return (
       <CatGrid
