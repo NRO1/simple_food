@@ -1,17 +1,28 @@
 import { StyleSheet, View, FlatList } from "react-native";
 import MealItem from "../components/MealItem";
-import { MEALS } from "../data/dummy-data.js";
+import { MEALS, CATEGORIES } from "../data/dummy-data.js";
+import { useLayoutEffect } from 'react';
 
-function MealsOverviewScreen({ route }) {
+function MealsOverviewScreen({ route, navigation }) {
   const catId = route.params.categoryId;
 
   const dispMeals = MEALS.filter((mealItem) => {
     return mealItem.categoryIds.indexOf(catId) >= 0;
   });
 
+  //setting options inside a screen is allowed only with useEffect or useLayoutEffect as shown here
+  useLayoutEffect(() => {
+    const catTitle = CATEGORIES.find((category) => category.id === catId).title;
+    navigation.setOptions({
+      title: catTitle
+    }),[catId, navigation]
+  })
+
+
   function renderMeal(itemData) {
     return (
       <MealItem
+      id= {itemData.item.id}
         title={itemData.item.title}
         imageUrl={itemData.item.imageUrl}
         duration={itemData.item.duration}
